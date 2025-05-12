@@ -169,6 +169,7 @@ class OAuthTokenCache(object):
                         PRIMARY KEY(api_key, lookup_key))''')
 
         db.commit()
+        db.close()
 
     @property
     def token(self):
@@ -212,6 +213,7 @@ class OAuthTokenCache(object):
                       token.fullname, token.username, token.user_nsid)
                      )
         db.commit()
+        db.close()
 
     @token.deleter
     def token(self):
@@ -228,6 +230,7 @@ class OAuthTokenCache(object):
         curs.execute('''DELETE FROM oauth_tokens WHERE api_key=? and lookup_key=?''',
                      (self.api_key, self.lookup_key))
         db.commit()
+        db.close()
 
     def forget(self):
         """Removes the cached token"""
