@@ -187,6 +187,7 @@ class OAuthTokenCache(object):
                         FROM oauth_tokens WHERE api_key=? and lookup_key=?''',
                      (self.api_key, self.lookup_key))
         token_data = curs.fetchone()
+        db.close()
 
         if token_data is None:
             return None
